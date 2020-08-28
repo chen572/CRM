@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import './App.css';
 import Home from './components/Home'
-import Clients from './components/Clients'
+import Clients from './components/Clients/Clients'
 import Actions from './components/Actions'
 import Analytics from './components/Analytics'
+import { inject, observer } from 'mobx-react'
 
-function App() {
+const App = inject('clientsStore')(observer((props) => {
+  const { clientsStore } = props
+
+  useEffect(() => {
+    async function clients() {
+      await clientsStore.getClients()
+    }
+    clients()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Router>
       <NavBar />
@@ -18,5 +29,6 @@ function App() {
     </Router>
   );
 }
+))
 
 export default App;

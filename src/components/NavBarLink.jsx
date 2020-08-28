@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, makeStyles, useMediaQuery, Icon } from '@material-ui/core';
+import { Button, makeStyles, useMediaQuery } from '@material-ui/core';
 
 const useStyles = makeStyles({
   bigButton: {
@@ -39,21 +39,18 @@ function NavBarLink(props) {
   const { link } = props;
   return (
     <>
-      <Link
-        className={classes.bigLink}
-        to={link.path}
-      >
+      <Link className={classes.bigLink} to={link.path}>
         <Button className={match ? classes.bigButton : classes.smallButton}>
           {match ? (
-            <Icon
+            <i
               style={{ color: 'whitesmoke', fontSize: 34, padding: 30 }}
               className={link.icon}
-            />
+            ></i>
           ) : (
-            <Icon
+            <i
               style={{ color: '#14213d', fontSize: 34, padding: 30 }}
               className={link.icon}
-            />
+            ></i>
           )}
           {match && link.text}
         </Button>
